@@ -51,7 +51,7 @@ footer {
   #backToTop {
   position: fixed;
   bottom: 30px;
-  right: 30px;
+  right: 15px;
   padding: 10px 15px;
   font-size: 16px;
   background-color: #333;
@@ -65,6 +65,24 @@ footer {
 }
 
 #backToTop:hover {
+  background-color: #555;
+}
+
+#darkModeToggle {
+  position: fixed;
+  top: 30px;
+  right: 15px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+#darkModeToggle:hover {
   background-color: #555;
 }
 }
