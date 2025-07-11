@@ -1,6 +1,6 @@
 console.log("Script loaded");
 
-// Back to Top button logic
+// 🔝 Back to Top Button Logic
 window.onscroll = function () {
   const btn = document.getElementById("backToTop");
   if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
@@ -17,8 +17,16 @@ function scrollToTop() {
   });
 }
 
-// Dark Mode toggle logic
+// 🌙 Dark Mode Toggle Logic
 const toggleBtn = document.getElementById("darkModeToggle");
+
 toggleBtn.addEventListener("click", function () {
   document.body.classList.toggle("dark-mode");
+
+  // Switch button icon/text
+  if (document.body.classList.contains("dark-mode")) {
+    toggleBtn.textContent = "☀️ Light Mode";
+  } else {
+    toggleBtn.textContent = "🌙 Dark Mode";
+  }
 });
