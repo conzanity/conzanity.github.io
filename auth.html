@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OTP Authentication</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+    form {
+      margin-bottom: 1rem;
+    }
+    input {
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      width: 100%;
+      max-width: 300px;
+    }
+    button {
+      padding: 0.5rem 1rem;
+    }
+    #verifySection {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Email Authentication</h2>
+
+  <form id="otpForm">
+    <input type="email" id="email" placeholder="Enter your email" required />
+    <button type="submit">Send OTP</button>
+  </form>
+
+  <div id="verifySection">
+    <form id="verifyForm">
+      <input type="text" id="otp" placeholder="Enter OTP" required />
+      <button type="submit">Verify OTP</button>
+    </form>
+  </div>
+
+  <script>
+    const otpForm = document.getElementById("otpForm");
+    const verifySection = document.getElementById("verifySection");
+    const verifyForm = document.getElementById("verifyForm");
+
+    otpForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+
+      const res = await fetch("http://localhost:3000/send-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await res.json();
+      alert(data.message);
+      if (data.success) {
+        verifySection.style.display = "block";
+      }
+    });
+
+    verifyForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const otp = document.getElementById("otp").value;
+
+      const res = await fetch("http://localhost:3000/verify-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp })
+      });
+
+      const data = await res.json();
+      alert(data.message);
+      if (data.success) {
+        window.location.href = "index.html"; // your portfolio
+      }
+    });
+  </script>
+</body>
+</html>
